@@ -287,7 +287,7 @@ namespace Services
 
             if(getName == null)
             {
-                return new ProductResponse(false, "Product name is not found", null);
+                return new ProductResponse(false, "Product name was not found", null);
             }
             return new ProductResponse(true,null,getName);
         }

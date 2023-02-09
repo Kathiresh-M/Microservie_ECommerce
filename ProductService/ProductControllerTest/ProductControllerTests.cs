@@ -131,6 +131,10 @@ namespace ProductControllerTest
             return context;
         }
 
+        /// <summary>
+        /// Create a new product with valid
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public void CreateProduct_valid_ReturnCreatedStatus()
         {
@@ -152,6 +156,10 @@ namespace ProductControllerTest
             Assert.IsType<CreatedResult>(result);
         }
 
+        /// <summary>
+        /// Create a new product with invalid admin id
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public void CreateProduct_InvalidAdmin_ReturnNotFoundStatus()
         {
@@ -174,7 +182,10 @@ namespace ProductControllerTest
             Assert.Equal("Admin Id not found", finalresult.Value);
         }
 
-        //conflict product 
+        /// <summary>
+        /// Create a existing product (return conflict)
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public void CreateProduct_InvalidProductExist_ReturnConflictStatus()
         {
@@ -197,6 +208,10 @@ namespace ProductControllerTest
             Assert.Equal("Product Name is already exists", finalresult.Value);
         }
 
+        /// <summary>
+        /// Get all product with valid
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public void GetAllProduct_Valid_ReturnOkStatus()
         {
@@ -205,6 +220,10 @@ namespace ProductControllerTest
             Assert.IsType<OkObjectResult>(result);
         }
 
+        /// <summary>
+        /// Get filtered product details with valid
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public void GetSingleProduct_Valid_ReturnOkStatus()
         {
@@ -214,6 +233,24 @@ namespace ProductControllerTest
             Assert.IsType<OkObjectResult>(result);
         }
 
+        /// <summary>
+        /// Get filtered product details with invalid product name
+        /// </summary>
+        /// <returns></returns>
+        [Fact]
+        public void GetSingleProduct_InValidProductName_ReturnOkStatus()
+        {
+            string parameterResource = "Pen";
+            var result = _productController.GetAllProductDetails(parameterResource);
+
+            var finalresult = Assert.IsType<NotFoundObjectResult>(result);
+            Assert.Equal("Product name was not found", finalresult.Value);
+        }
+
+        /// <summary>
+        /// update product with valid
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public void UpdateProduct_Valid_ReturnOkStatus()
         { 
@@ -236,6 +273,10 @@ namespace ProductControllerTest
             Assert.Equal("Updated Successfully", finalresult.Value);
         }
 
+        /// <summary>
+        /// Update product with invalid product id
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public void UpdateProduct_InValidProductId_ReturnNotFoundStatus()
         {
@@ -258,6 +299,10 @@ namespace ProductControllerTest
             Assert.Equal("Product not found", finalresult.Value);
         }
 
+        /// <summary>
+        /// Product add to cart, where already exist in cart
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public void AddProductToCart_ValidAlreadyExistInCart_ReturnOkStatus()
         {
@@ -275,6 +320,10 @@ namespace ProductControllerTest
             Assert.Equal("Successfully updated In Cart", finalresult.Value);
         }
 
+        /// <summary>
+        /// Product add to cart, where quantity is invalid (return badrequest)
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public void AddProductToCart_InValidQuantity_ReturnBadRequestStatus()
         {
@@ -292,6 +341,10 @@ namespace ProductControllerTest
             Assert.Equal("Please give valuable Quantity", finalresult.Value);
         }
 
+        /// <summary>
+        /// Product add to cart with invalid product quantity
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public void AddProductToCart_InValidProductQuantity_ReturnNotFoundStatus()
         {
@@ -309,6 +362,10 @@ namespace ProductControllerTest
             Assert.Equal("Given Product Quantity is out of stock", finalresult.Value);
         }
 
+        /// <summary>
+        /// Product add to cart with invalid user id
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public void AddProductToCart_InValiUserId_ReturnNotFoundStatus()
         {
@@ -326,6 +383,10 @@ namespace ProductControllerTest
             Assert.Equal("User not found", finalresult.Value);
         }
 
+        /// <summary>
+        /// Product add to cart with valid
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public void AddProductToCart_Valid_ReturnOkStatus()
         {
@@ -343,6 +404,10 @@ namespace ProductControllerTest
             Assert.Equal("Successfully Added", finalresult.Value);
         }
 
+        /// <summary>
+        /// Product add to wishlist with valid
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public void AddProductToWishlist_Valid_ReturnOkStatus()
         {
@@ -359,6 +424,10 @@ namespace ProductControllerTest
             Assert.Equal("Successfully Product Details are added to Wishlist", finalresult.Value);
         }
 
+        /// <summary>
+        /// Product add to wishlist, where already exist in wishlist
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public void AddProductToWishlist_ValidButAlreadyExist_ReturnConflictStatus()
         {
@@ -377,6 +446,10 @@ namespace ProductControllerTest
             Assert.Equal("Product is already exist in Wishlist", finalresult.Value);
         }
 
+        /// <summary>
+        /// Product Add to Wishlist with invalid userid
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public void AddProductToWishlist_InValidUserId_ReturnNotFoundStatus()
         {
@@ -394,6 +467,10 @@ namespace ProductControllerTest
             Assert.Equal("User not found", finalresult.Value);
         }
 
+        /// <summary>
+        /// Delete Product in cart with valid 
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public void DeleteProductInCart_Valid_ReturnOkStatus()
         {
@@ -406,6 +483,10 @@ namespace ProductControllerTest
             Assert.Equal("Deleted Successsully in Cart "+productId , finalresult.Value);
         }
 
+        /// <summary>
+        /// Delete product in cart , where user id and product id was invalid
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public void DeleteProductInCart_InValidUserIdAndProductId_ReturnNotFoundStatus()
         {
@@ -418,6 +499,10 @@ namespace ProductControllerTest
             Assert.Equal("Product and User Id was not found", finalresult.Value);
         }
 
+        /// <summary>
+        /// delete product in wishlist
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public void DeleteProductInWishlist_Valid_ReturnOkStatus()
         {
@@ -430,6 +515,10 @@ namespace ProductControllerTest
             Assert.Equal("Deleted Successsully in WishList " + productId, finalresult.Value);
         }
 
+        /// <summary>
+        /// Delete product in wishlist, where userid and product id was invalid
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public void DeleteProductInWishList_InValidUserIdAndProductId_ReturnNotFoundStatus()
         {
@@ -442,6 +531,10 @@ namespace ProductControllerTest
             Assert.Equal("Product Id and User Id is not found in Wishlist", finalresult.Value);
         }
 
+        /// <summary>
+        /// Update product count and visibility with valid
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public void UpdateCountAndVisibility_Valid_ReturnOkStatus()
         {
@@ -457,6 +550,10 @@ namespace ProductControllerTest
             Assert.Equal("Updated Successfully", finalresult.Value);
         }
 
+        /// <summary>
+        /// Update product count and visibility with invalid product id
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public void UpdateCountAndVisibility_InValidProductId_ReturnOkStatus()
         {
@@ -472,6 +569,10 @@ namespace ProductControllerTest
             Assert.Equal("Product Id was not found", finalresult.Value);
         }
 
+        /// <summary>
+        /// Product move wishlist to cart with valid
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public void MoveWishlistToCart_ValidExistProductInCart_ReturnOkStatus()
         {
@@ -488,6 +589,10 @@ namespace ProductControllerTest
             Assert.Equal("Product is already exist in cart, so given product is updated to cart", finalresult.Value);
         }
 
+        /// <summary>
+        /// Move product in wishlist ticart with valid
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public void MoveWishlistToCart_Valid_ReturnOkStatus()
         {
@@ -504,6 +609,10 @@ namespace ProductControllerTest
             Assert.Equal("Successfully Added", finalresult.Value);
         }
 
+        /// <summary>
+        /// Move product in wishlist ti cart where invalid userid and product id
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public void MoveWishlistToCart_InValidUserIdAndProductId_ReturnNotFoundStatus()
         {
@@ -520,6 +629,10 @@ namespace ProductControllerTest
             Assert.Equal("User Id ans Product Id was not found", finalresult.Value);
         }
 
+        /// <summary>
+        /// Move wishlist to cart with invalid quantity
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public void MoveWishlistToCart_InValidOutOfStock_ReturnNotFoundStatus()
         {
