@@ -1,0 +1,12 @@
+D:\ECommerceAssignment\ProductService\Reposioty\bin\Debug\net7.0\Reposioty.deps.json
+D:\ECommerceAssignment\ProductService\Reposioty\bin\Debug\net7.0\Reposioty.dll
+D:\ECommerceAssignment\ProductService\Reposioty\bin\Debug\net7.0\Reposioty.pdb
+D:\ECommerceAssignment\ProductService\Reposioty\obj\Debug\net7.0\Reposioty.csproj.AssemblyReference.cache
+D:\ECommerceAssignment\ProductService\Reposioty\obj\Debug\net7.0\Reposioty.GeneratedMSBuildEditorConfig.editorconfig
+D:\ECommerceAssignment\ProductService\Reposioty\obj\Debug\net7.0\Reposioty.AssemblyInfoInputs.cache
+D:\ECommerceAssignment\ProductService\Reposioty\obj\Debug\net7.0\Reposioty.AssemblyInfo.cs
+D:\ECommerceAssignment\ProductService\Reposioty\obj\Debug\net7.0\Reposioty.csproj.CoreCompileInputs.cache
+D:\ECommerceAssignment\ProductService\Reposioty\obj\Debug\net7.0\Reposioty.dll
+D:\ECommerceAssignment\ProductService\Reposioty\obj\Debug\net7.0\refint\Reposioty.dll
+D:\ECommerceAssignment\ProductService\Reposioty\obj\Debug\net7.0\Reposioty.pdb
+D:\ECommerceAssignment\ProductService\Reposioty\obj\Debug\net7.0\ref\Reposioty.dll

@@ -1,0 +1,17 @@
+D:\ECommerceAssignment\ProductService\Reposioty\bin\Debug\net7.0\Repository.deps.json
+D:\ECommerceAssignment\ProductService\Reposioty\bin\Debug\net7.0\Repository.dll
+D:\ECommerceAssignment\ProductService\Reposioty\bin\Debug\net7.0\Repository.pdb
+D:\ECommerceAssignment\ProductService\Reposioty\bin\Debug\net7.0\Contracts.dll
+D:\ECommerceAssignment\ProductService\Reposioty\bin\Debug\net7.0\Entities.dll
+D:\ECommerceAssignment\ProductService\Reposioty\bin\Debug\net7.0\Contracts.pdb
+D:\ECommerceAssignment\ProductService\Reposioty\bin\Debug\net7.0\Entities.pdb
+D:\ECommerceAssignment\ProductService\Reposioty\obj\Debug\net7.0\Repository.csproj.AssemblyReference.cache
+D:\ECommerceAssignment\ProductService\Reposioty\obj\Debug\net7.0\Repository.GeneratedMSBuildEditorConfig.editorconfig
+D:\ECommerceAssignment\ProductService\Reposioty\obj\Debug\net7.0\Repository.AssemblyInfoInputs.cache
+D:\ECommerceAssignment\ProductService\Reposioty\obj\Debug\net7.0\Repository.AssemblyInfo.cs
+D:\ECommerceAssignment\ProductService\Reposioty\obj\Debug\net7.0\Repository.csproj.CoreCompileInputs.cache
+D:\ECommerceAssignment\ProductService\Reposioty\obj\Debug\net7.0\Repository.csproj.CopyComplete
+D:\ECommerceAssignment\ProductService\Reposioty\obj\Debug\net7.0\Repository.dll
+D:\ECommerceAssignment\ProductService\Reposioty\obj\Debug\net7.0\refint\Repository.dll
+D:\ECommerceAssignment\ProductService\Reposioty\obj\Debug\net7.0\Repository.pdb
+D:\ECommerceAssignment\ProductService\Reposioty\obj\Debug\net7.0\ref\Repository.dll
