@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ECommerceAssignment\\APIGateway\\APIGateway\\APIGateway.csproj": {}
+    "D:\\ECommerceAssignment\\Git\\APIGateway\\APIGateway\\APIGateway.csproj": {}
   },
   "projects": {
-    "D:\\ECommerceAssignment\\APIGateway\\APIGateway\\APIGateway.csproj": {
+    "D:\\ECommerceAssignment\\Git\\APIGateway\\APIGateway\\APIGateway.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ECommerceAssignment\\APIGateway\\APIGateway\\APIGateway.csproj",
+        "projectUniqueName": "D:\\ECommerceAssignment\\Git\\APIGateway\\APIGateway\\APIGateway.csproj",
         "projectName": "APIGateway",
-        "projectPath": "D:\\ECommerceAssignment\\APIGateway\\APIGateway\\APIGateway.csproj",
+        "projectPath": "D:\\ECommerceAssignment\\Git\\APIGateway\\APIGateway\\APIGateway.csproj",
         "packagesPath": "C:\\Users\\Kathiresh M\\.nuget\\packages\\",
-        "outputPath": "D:\\ECommerceAssignment\\APIGateway\\APIGateway\\obj\\",
+        "outputPath": "D:\\ECommerceAssignment\\Git\\APIGateway\\APIGateway\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Kathiresh M\\AppData\\Roaming\\NuGet\\NuGet.Config",
