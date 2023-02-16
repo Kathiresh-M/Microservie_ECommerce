@@ -37,6 +37,9 @@ namespace Entities.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 
+                    b.Property<bool>("IsPurchase")
+                        .HasColumnType("boolean");
+
                     b.Property<Guid>("Product_Id")
                         .HasColumnType("uuid");
 

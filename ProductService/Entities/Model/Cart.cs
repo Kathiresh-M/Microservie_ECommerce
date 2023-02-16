@@ -11,5 +11,6 @@ namespace Entities.Model
         public Guid User_Id { get; set; }
         public Guid Product_Id { get; set; }
         public int Quantity { get; set; }
+        public bool IsPurchase { get; set; } = false;
     }
 }

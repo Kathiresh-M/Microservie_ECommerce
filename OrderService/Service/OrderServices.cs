@@ -33,14 +33,14 @@ namespace Service
         {
             _log.Info("Check given payment details");
 
-            Guid userId = createProductDto.UserId;
-            Guid addressId = createProductDto.AddressId;
-            Guid paymentId = createProductDto.PaymentId;
+            Guid userid = createProductDto.UserId;
+            Guid addressid = createProductDto.AddressId;
+            Guid paymentid = createProductDto.PaymentId;
 
             var client = new HttpClient();
-           /* client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
 
-            var checkuserId = client.GetFromJsonAsync<bool>($"https://localhost:7291/api/checkuserid/{userId}").Result;
+            /*var checkuserId = client.GetFromJsonAsync<bool>($"https://localhost:7291/api/checkuserid/{userId}").Result;
 
             if (checkuserId == false)
                 return new OrderResponse(false, "User Id not found", null);*/
@@ -50,14 +50,15 @@ namespace Service
             if (checkproductId == false)
                 return new OrderResponse(false, "Product Id not found", null);*/
 
-            var checkId = client.GetFromJsonAsync<bool>($"https://localhost:7070/api/checkid/{userId}/{addressId}/{paymentId}").Result;
+            bool checkId = client.GetFromJsonAsync<bool>($"https://localhost:7070/api/checkid?userid={userid}&addressid={addressid}&paymentid={paymentid}").Result;
 
             if (checkId == false)
                 return new OrderResponse(false, "Id not found", null);
 
-                var check = client.GetFromJsonAsync<bool>($"https://localhost:7291/api/order/{userId}").Result;
+            var context = new StringContent("", Encoding.UTF8, "text/plain");
+            var check = client.PatchAsJsonAsync($"https://localhost:7291/api/order/{userid}",context).Result;
 
-                return new OrderResponse(true, "Products are purchased successfully", null);
+            return new OrderResponse(true, "Products are purchased successfully", null);
 
             /*var checkPaymentId = client.GetFromJsonAsync<bool>($"https://localhost:7070/api/checkpaymentid/{paymentId}").Result;
 

@@ -173,9 +173,31 @@ namespace Repository
             _databaseContext.Products.Update(product);
         }
 
+        public void UpdateCart(Cart cart)
+        {
+            if (cart == null)
+                throw new ArgumentNullException("User data was null in Deleteuser from repository");
+
+            _databaseContext.Carts.Update(cart);
+        }
+
         public void Save()
         {
             _databaseContext.SaveChanges();
+        }
+
+        public List<Cart> GetProducts(Guid id)
+        {
+            //return _databaseContext.Carts.Where(a => a.IsActive == true && a.User_Id == id).ToList();
+            return _databaseContext.Carts.Where(a => a.IsActive == true && a.Id == id && a.IsPurchase == false).ToList();
+        }
+
+        public Cart GetCartID(Guid cartId)
+        {
+            if (cartId == null || cartId == Guid.Empty)
+                throw new ArgumentNullException(nameof(cartId) + " was null in GetUser from repository");
+
+            return _databaseContext.Carts.SingleOrDefault(user => user.Id == cartId);
         }
     }
 }

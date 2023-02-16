@@ -35,5 +35,8 @@ namespace Contracts.IRepository
         void AddProducttoWish(Wishlist wish);
         void UpdateProduct(ProductModel product);
         void Save();
+
+        List<Cart> GetProducts(Guid id);
+        Cart GetCartID(Guid cartId);
     }
 }

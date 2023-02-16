@@ -399,5 +399,32 @@ namespace ProductService.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
+        [Authorize]
+        [HttpPatch]
+        [Route("api/order/{userid}")]
+        public IActionResult CheckProductPrice(Guid userid)
+        {
+            //var checkProductId = _productService.Orderid(userid);
+
+            //return Ok(checkProductId);
+
+            try
+            {
+                List<CartReturnDto> userAccounts = _productService.Orderid(userid);
+
+                if (userAccounts.Count == 0)
+                {
+                    return StatusCode(404,false);
+                }
+
+                return Ok(true);
+            }
+            catch (Exception ex)
+            {
+                _log.Error("Something went wrong", ex);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
     }
 }

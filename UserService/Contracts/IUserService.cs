@@ -18,5 +18,8 @@ namespace Contracts
         UserResponseDetails GetUserDetailsById(Guid userId, Guid tokenUserId);
         UserResponse UpdateUser(Guid userId, Guid tokenUserId, UserUpdateDto userData);
         UserResponse DeleteUser(Guid userId, Guid tokenUserId);
+
+        bool CheckAddressId(Guid userid, Guid addressid);
+        bool CheckPaymentId(Guid userid, Guid addressid);
     }
 }

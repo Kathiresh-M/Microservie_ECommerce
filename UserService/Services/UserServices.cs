@@ -314,5 +314,14 @@ namespace Services
             return areSame;
         }
 
+        public bool CheckAddressId(Guid userid, Guid addressid)
+        {
+            return _userRepository.CheckAddress(userid, addressid);
+        }
+
+        public bool CheckPaymentId(Guid userid, Guid addressid)
+        {
+            return _userRepository.CheckPayment(userid, addressid);
+        }
     }
 }

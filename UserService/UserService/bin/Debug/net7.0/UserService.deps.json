@@ -1283,7 +1283,9 @@
         "dependencies": {
           "Contracts": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "7.0.2",
-          "System.IdentityModel.Tokens.Jwt": "6.25.1"
+          "Microsoft.Extensions.Logging.Log4Net.AspNetCore": "6.1.0",
+          "System.IdentityModel.Tokens.Jwt": "6.25.1",
+          "log4net": "2.0.15"
         },
         "runtime": {
           "Services.dll": {}

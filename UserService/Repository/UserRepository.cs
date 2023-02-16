@@ -123,10 +123,19 @@ namespace Repository
 
             _dbcontext.Addresses.AddRange(UserData.Addresses);
         }
-
         public void Save()
         {
             _dbcontext.SaveChanges();
+        }
+
+        public bool CheckAddress(Guid userid, Guid addressid)
+        {
+            return _dbcontext.Addresses.Any(a => a.Id == addressid && a.UserId == userid);
+        }
+
+        public bool CheckPayment(Guid userid, Guid paymentid)
+        {
+            return _dbcontext.Payments.Any(a => a.Id == paymentid && a.UserId == userid);
         }
     }
 }

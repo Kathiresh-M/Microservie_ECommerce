@@ -23,5 +23,8 @@ namespace Contracts.IRepository
         void UpdateUser(User user);
         void DeleteUser(User user);
         void Save();
+
+        bool CheckAddress(Guid userid, Guid addressid);
+        bool CheckPayment(Guid userid, Guid paymentid);
     }
 }

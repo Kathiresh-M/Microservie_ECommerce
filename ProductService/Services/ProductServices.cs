@@ -98,9 +98,9 @@ namespace Services
 
             try
             {
-                bool checkProductIdExists = _productRepository.ChckProductIdInCart(cart.ProductId, userId);
+                bool checkProductIdExists = _productRepository.ChckProductIdInCart(cart.ProductId, userId); //check product id exist
 
-                int checkProductQuantityCount = _productRepository.GetProductQuantityCount(cart.ProductId);
+                int checkProductQuantityCount = _productRepository.GetProductQuantityCount(cart.ProductId); //get product count
 
                 if (checkProductQuantityCount < cart.Quantity)
                     return new CartResponses(false, "Given Product Quantity is out of stock", null);
@@ -120,14 +120,16 @@ namespace Services
                     return new CartResponses(true, "Successfully Added", Cart);
                 }
 
+                //int checkProductQuantityCount = _productRepository.GetProductQuantityCount(cart.ProductId); //get product count
+
                 if (cart.Quantity == 0)
                     return new CartResponses(false, "Please give valuable Quantity", null);
 
-                bool checkUserAndProductId = _productRepository.CheckUserAndProductId(userId, cart.ProductId);
+                bool checkUserAndProductId = _productRepository.CheckUserAndProductId(userId, cart.ProductId); //check same userid and productid in cart or not
 
                 //checkProductQuantityCount = checkProductQuantityCount - cart.Quantity;
 
-                int checkCartQuantityCount = _productRepository.GetCartQuantityCount(cart.ProductId, userId);
+                int checkCartQuantityCount = _productRepository.GetCartQuantityCount(cart.ProductId, userId); //take quantity of already existed product and user id
 
                 checkCartQuantityCount = checkCartQuantityCount + cart.Quantity;
 
@@ -415,5 +417,41 @@ namespace Services
             return new WishListResponse(true, null, getCartIdUsingCartId);
         }
 
+        public List<CartReturnDto> Orderid(Guid id)
+        {
+            //var temp = _productRepository.GetProducts(id);
+            List<CartReturnDto> userProduct = _mapper.Map<List<CartReturnDto>>(_productRepository.GetProducts(id));
+
+            foreach(var record in userProduct)
+            {
+                //Guid productid = Guid.Parse("15b28e89-5743-4b15-83a0-1c505672a0be");
+                //var DecreaseProductCount = record.Quantity;
+
+                //int checkProductQuantityCount = _productRepository.GetProductQuantityCount(record.ProductId);
+                int checkProductQuantityCount = _productRepository.GetProductQuantityCount(record.Product_Id);
+
+                var reductCount = checkProductQuantityCount - record.Quantity;
+
+                var getProductId = _productRepository.GetProduct(record.Product_Id);
+
+
+                if ((record.Quantity) != null)
+                    getProductId.ProductCount = reductCount;
+
+                _productRepository.UpdateProduct(getProductId);
+                _productRepository.Save();
+
+                var checkCart = _productRepository.GetCartID(record.id);
+
+                if ((record.id) != Guid.Empty)
+                    checkCart.IsPurchase = true;
+
+                _productRepository.UpdateCartQuantity(checkCart);
+                _productRepository.Save();
+            }
+
+            return userProduct;
+
+        }
     }
 }

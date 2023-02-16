@@ -261,5 +261,27 @@ namespace UserService.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
+        [Authorize]
+        [HttpGet]
+        [Route("api/checkid")]
+        public IActionResult CheckId([FromQuery(Name="userid")] Guid userid,[FromQuery(Name="addressid")] Guid addressid,[FromQuery(Name = "paymentid")] Guid paymentid)
+        {   
+            var checkAddressId = _userService.CheckAddressId(userid, addressid);
+
+            if (checkAddressId == false)
+            {
+                return StatusCode(404, "false");
+            }
+
+            var checkPaymentId = _userService.CheckPaymentId(userid, paymentid);
+
+            if (checkPaymentId == false)
+            {
+                return StatusCode(404, "false") ;
+            }
+
+            return StatusCode(200,checkPaymentId);
+        }
     }
 }

@@ -22,5 +22,7 @@ namespace Contracts
         CartResponses DeleteProductInCart(Guid userId, Guid productId, Guid tokenUserId);
         List<ProductReturnDto> GetAllProductDetails();
         CartResponses AddtoCartProducts(Guid userId, AddToCartDto product, Guid TokenUserId);
+
+        List<CartReturnDto> Orderid(Guid id);
     }
 }
