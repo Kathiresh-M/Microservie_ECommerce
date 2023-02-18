@@ -23,6 +23,7 @@ namespace Contracts
         List<ProductReturnDto> GetAllProductDetails();
         CartResponses AddtoCartProducts(Guid userId, AddToCartDto product, Guid TokenUserId);
 
-        List<CartReturnDto> Orderid(Guid id);
+        //List<CartReturnDto> Orderid(Guid id);
+        CartResponses Orderid(Guid id);
     }
 }

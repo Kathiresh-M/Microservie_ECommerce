@@ -54,7 +54,7 @@ namespace Repository
 
         public bool ChckProductIdInCart(Guid chckProductId, Guid userId)
         {
-            return _databaseContext.Carts.Any(p => p.Product_Id == chckProductId && p.User_Id == userId);
+            return _databaseContext.Carts.Any(p => p.Product_Id == chckProductId && p.User_Id == userId && p.IsPurchase == false);
         }
 
         public Guid ChckProductIdInCartAndGetCartId(Guid chckProductId, Guid userId)
@@ -189,7 +189,8 @@ namespace Repository
         public List<Cart> GetProducts(Guid id)
         {
             //return _databaseContext.Carts.Where(a => a.IsActive == true && a.User_Id == id).ToList();
-            return _databaseContext.Carts.Where(a => a.IsActive == true && a.Id == id && a.IsPurchase == false).ToList();
+            //return _databaseContext.Carts.Where(a => a.IsActive == true && a.Id == id && a.IsPurchase == false).ToList();
+            return _databaseContext.Carts.Where(a => a.IsActive == true && a.User_Id == id && a.IsPurchase == false).ToList();
         }
 
         public Cart GetCartID(Guid cartId)
@@ -199,5 +200,14 @@ namespace Repository
 
             return _databaseContext.Carts.SingleOrDefault(user => user.Id == cartId);
         }
+
+        public Cart GetUserIDInCart(Guid userId)
+        {
+            if (userId == null || userId == Guid.Empty)
+                throw new ArgumentNullException(nameof(userId) + " was null in GetUserIDInCart from repository");
+
+            return _databaseContext.Carts.SingleOrDefault(user => user.User_Id == userId);
+        }
+
     }
 }

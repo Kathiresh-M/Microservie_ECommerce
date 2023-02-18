@@ -6,6 +6,7 @@ using Entities.Dto;
 using Entities.Model;
 using Entities.Profiles;
 using Entities.RequestDto;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -57,6 +59,9 @@ namespace ProductControllerTest
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
             }
+
+
+            
 
             context.Products.AddRange(new ProductModel
             {
@@ -138,6 +143,8 @@ namespace ProductControllerTest
         [Fact]
         public void CreateProduct_valid_ReturnCreatedStatus()
         {
+            
+
             Guid id = Guid.Parse("3039a302-5cdd-48a7-b112-7b3d32b8b48d");
 
             CreateProductDto product = new CreateProductDto()
@@ -306,6 +313,16 @@ namespace ProductControllerTest
         [Fact]
         public void AddProductToCart_ValidAlreadyExistInCart_ReturnOkStatus()
         {
+            string usersId = "97088ab0-6c00-432d-81ce-87828a674b55";
+            Mock<HttpContext> contextMock = new Mock<HttpContext>();
+            contextMock.Setup(x => x.User).Returns(new ClaimsPrincipal(new ClaimsIdentity(new Claim[] {
+                                        new Claim(ClaimTypes.NameIdentifier,usersId),
+                                        new Claim(ClaimTypes.Role,"Admin"),
+                                        // other required and custom claims
+                           }, "TestAuthentication")));
+
+            _productController.ControllerContext.HttpContext = contextMock.Object;
+
             Guid userId = Guid.Parse("97088ab0-6c00-432d-81ce-87828a674b55");
 
             AddToCartDto AddToCart = new AddToCartDto()
@@ -390,6 +407,7 @@ namespace ProductControllerTest
         [Fact]
         public void AddProductToCart_Valid_ReturnOkStatus()
         {
+
             Guid userId = Guid.Parse("97088ab0-6c00-432d-81ce-87828a674b55");
 
             AddToCartDto AddToCart = new AddToCartDto()

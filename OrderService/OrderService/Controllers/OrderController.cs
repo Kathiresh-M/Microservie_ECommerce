@@ -45,7 +45,10 @@ namespace OrderService.Controllers
                 if (!checkGivenDetails.IsSuccess && checkGivenDetails.Message.Contains("found"))
                     return NotFound(checkGivenDetails.Message);
 
-                return Ok();
+                if (!checkGivenDetails.IsSuccess && checkGivenDetails.Message.Contains("Content"))
+                    return StatusCode(StatusCodes.Status204NoContent,"No Content");
+
+                return Ok("Successfully Purchased your Product.");
             }
             catch (Exception exception)
             {

@@ -40,40 +40,25 @@ namespace Service
             var client = new HttpClient();
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
 
-            /*var checkuserId = client.GetFromJsonAsync<bool>($"https://localhost:7291/api/checkuserid/{userId}").Result;
-
-            if (checkuserId == false)
-                return new OrderResponse(false, "User Id not found", null);*/
-
-           /* var checkproductId = client.GetFromJsonAsync<bool>($"https://localhost:7291/api/checkproductid/{productId}").Result;
-
-            if (checkproductId == false)
-                return new OrderResponse(false, "Product Id not found", null);*/
-
             bool checkId = client.GetFromJsonAsync<bool>($"https://localhost:7070/api/checkid?userid={userid}&addressid={addressid}&paymentid={paymentid}").Result;
 
             if (checkId == false)
                 return new OrderResponse(false, "Id not found", null);
 
             var context = new StringContent("", Encoding.UTF8, "text/plain");
+
             var check = client.PatchAsJsonAsync($"https://localhost:7291/api/order/{userid}",context).Result;
 
+            if (check == null)
+                return new OrderResponse(false,"Not Exist",null);
+
+            if (check.StatusCode == System.Net.HttpStatusCode.NotFound)
+                return new OrderResponse(false, "Not found", null);
+
+            if (check.StatusCode == System.Net.HttpStatusCode.NoContent)
+                return new OrderResponse(false, "No Content", null);
+
             return new OrderResponse(true, "Products are purchased successfully", null);
-
-            /*var checkPaymentId = client.GetFromJsonAsync<bool>($"https://localhost:7070/api/checkpaymentid/{paymentId}").Result;
-
-            if (checkPaymentId == false)
-                return new OrderResponse(false, "Payment Id not found", null);*/
-
-           /* var checkpayemnttype = client.GetFromJsonAsync<bool>($"https://localhost:7070/api/checkpaymenttype/{paymentType}").Result;
-
-            if (checkpayemnttype == false)
-                return new OrderResponse(false, "Payment Type was not found",null);*/
-
-           /* var checktotalamount = client.GetFromJsonAsync<bool>($"https://localhost:7070/api/checktotalamount/{productId}/{totalprice}").Result;
-
-            if (checktotalamount == false)
-                return new OrderResponse(false, "Given amount is mismatch, please give correct amount", null);*/
         }
     }
 }

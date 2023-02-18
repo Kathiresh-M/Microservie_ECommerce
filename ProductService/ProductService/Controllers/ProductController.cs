@@ -4,6 +4,7 @@ using Contracts.Responses;
 using Entities.Dto;
 using Entities.RequestDto;
 using log4net;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
@@ -12,6 +13,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection.Metadata.Ecma335;
 using System.Security.Claims;
+using System.Xml.Schema;
 
 namespace ProductService.Controllers
 {
@@ -51,11 +53,10 @@ namespace ProductService.Controllers
 
             try
             {
-                /*Guid tokenUserId;
-                var isValidToken = Guid.TryParse(User.FindFirstValue("user_id"), out tokenUserId);*/
+                Guid tokenUserId;
 
-                Guid tokenUserId = Guid.Parse("3039a302-5cdd-48a7-b112-7b3d32b8b48d");
-               
+                tokenUserId = Guid.Parse("3039a302-5cdd-48a7-b112-7b3d32b8b48d");
+
                 ProductResponse response = _productService.AddProduct(adminid , updateProduct, tokenUserId);
 
                 if(!response.IsSuccess && response.Message.Contains("found"))
@@ -162,9 +163,6 @@ namespace ProductService.Controllers
         {
             _log.Info("Update User Details");
 
-            /*Guid tokenUserId;
-            var isValidToken = Guid.TryParse(User.FindFirstValue("user_id"), out tokenUserId);*/
-
             Guid tokenUserId = Guid.Parse("3039a302-5cdd-48a7-b112-7b3d32b8b48d");
 
             try
@@ -202,9 +200,7 @@ namespace ProductService.Controllers
         {
             _log.Info("Add Product to Cart ");
 
-            /*Guid tokenUserId;
-            var isValidToken = Guid.TryParse(User.FindFirstValue("user_id"), out tokenUserId);*/
-           
+
             Guid tokenUserId = Guid.Parse("97088ab0-6c00-432d-81ce-87828a674b55");
 
             try
@@ -242,9 +238,6 @@ namespace ProductService.Controllers
         public IActionResult AddProductToWishList([FromBody] AddProductToWishlist productToWishList)
         {
             _log.Info("Add Product details To Wishlist");
-
-            /*Guid tokenUserId;
-            Guid.TryParse(User.FindFirstValue("user_id"), out tokenUserId);*/
 
             Guid tokenUserId = Guid.Parse("97088ab0-6c00-432d-81ce-87828a674b55");
 
@@ -284,9 +277,6 @@ namespace ProductService.Controllers
         {
             _log.Info("Add Product to wishlist to cart");
 
-            /*Guid tokenUserId;
-            var tokenid = Guid.TryParse(User.FindFirstValue("user_id"), out tokenUserId);*/
-
             Guid tokenUserId = Guid.Parse("97088ab0-6c00-432d-81ce-87828a674b55");
 
             try
@@ -323,9 +313,6 @@ namespace ProductService.Controllers
         public IActionResult DeleteProductInCart(Guid userid, Guid productid)
         {
             _log.Info("Delete User");
-
-            /*Guid tokenUserId;
-            var isValidToken = Guid.TryParse(User.FindFirstValue("user_id"), out tokenUserId);*/
 
             Guid tokenUserId = Guid.Parse("97088ab0-6c00-432d-81ce-87828a674b55");
 
@@ -369,9 +356,6 @@ namespace ProductService.Controllers
         {
             _log.Info("Delete Product in Wishlist");
 
-            /*Guid tokenUserId;
-            var isValidToken = Guid.TryParse(User.FindFirstValue("user_id"), out tokenUserId);*/
-
             Guid tokenUserId = Guid.Parse("97088ab0-6c00-432d-81ce-87828a674b55");
 
             if (productid == null || productid == Guid.Empty)
@@ -405,26 +389,16 @@ namespace ProductService.Controllers
         [Route("api/order/{userid}")]
         public IActionResult CheckProductPrice(Guid userid)
         {
-            //var checkProductId = _productService.Orderid(userid);
+                CartResponses userAccounts = _productService.Orderid(userid);
 
-            //return Ok(checkProductId);
+                if (!userAccounts.IsSuccess && userAccounts.Message.Contains("Exist"))
+                    return StatusCode(404, userAccounts.Message);
 
-            try
-            {
-                List<CartReturnDto> userAccounts = _productService.Orderid(userid);
+                if (!userAccounts.IsSuccess && userAccounts.Message.Contains("found"))
+                    return StatusCode(202, userAccounts.Message);
 
-                if (userAccounts.Count == 0)
-                {
-                    return StatusCode(404,false);
-                }
-
-                return Ok(true);
-            }
-            catch (Exception ex)
-            {
-                _log.Error("Something went wrong", ex);
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
+                return StatusCode(200, true);
+            
         }
     }
 }

@@ -266,22 +266,30 @@ namespace UserService.Controllers
         [HttpGet]
         [Route("api/checkid")]
         public IActionResult CheckId([FromQuery(Name="userid")] Guid userid,[FromQuery(Name="addressid")] Guid addressid,[FromQuery(Name = "paymentid")] Guid paymentid)
-        {   
-            var checkAddressId = _userService.CheckAddressId(userid, addressid);
-
-            if (checkAddressId == false)
+        {
+            try
             {
-                return StatusCode(404, "false");
+                var checkAddressId = _userService.CheckAddressId(userid, addressid);
+
+                if (checkAddressId == false)
+                {
+                    return StatusCode(404, "false");
+                }
+
+                var checkPaymentId = _userService.CheckPaymentId(userid, paymentid);
+
+                if (checkPaymentId == false)
+                {
+                    return StatusCode(404, "false");
+                }
+
+                return StatusCode(200, checkPaymentId);
             }
-
-            var checkPaymentId = _userService.CheckPaymentId(userid, paymentid);
-
-            if (checkPaymentId == false)
+            catch(Exception exception)
             {
-                return StatusCode(404, "false") ;
+                _log.Error("Something went wrong", exception);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
-
-            return StatusCode(200,checkPaymentId);
         }
     }
 }

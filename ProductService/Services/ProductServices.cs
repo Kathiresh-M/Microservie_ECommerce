@@ -417,17 +417,20 @@ namespace Services
             return new WishListResponse(true, null, getCartIdUsingCartId);
         }
 
-        public List<CartReturnDto> Orderid(Guid id)
+        public CartResponses Orderid(Guid id)
         {
-            //var temp = _productRepository.GetProducts(id);
+            var getUserIdInCart = _productRepository.GetUserIDInCart(id);
+
+            if (getUserIdInCart == null)
+                return new CartResponses(false, "User is not Exist in Cart",null);
+
             List<CartReturnDto> userProduct = _mapper.Map<List<CartReturnDto>>(_productRepository.GetProducts(id));
 
-            foreach(var record in userProduct)
-            {
-                //Guid productid = Guid.Parse("15b28e89-5743-4b15-83a0-1c505672a0be");
-                //var DecreaseProductCount = record.Quantity;
+            if (userProduct.Count == 0)
+                return new CartResponses(false, "No records found",null);
 
-                //int checkProductQuantityCount = _productRepository.GetProductQuantityCount(record.ProductId);
+            foreach (var record in userProduct)
+            {
                 int checkProductQuantityCount = _productRepository.GetProductQuantityCount(record.Product_Id);
 
                 var reductCount = checkProductQuantityCount - record.Quantity;
@@ -439,18 +442,20 @@ namespace Services
                     getProductId.ProductCount = reductCount;
 
                 _productRepository.UpdateProduct(getProductId);
-                _productRepository.Save();
 
                 var checkCart = _productRepository.GetCartID(record.id);
 
                 if ((record.id) != Guid.Empty)
                     checkCart.IsPurchase = true;
 
+                checkCart.IsActive = false;
+
                 _productRepository.UpdateCartQuantity(checkCart);
-                _productRepository.Save();
             }
 
-            return userProduct;
+                _productRepository.Save();
+
+            return new CartResponses(true, null, null);
 
         }
     }

@@ -275,6 +275,18 @@
       ],
       "UpstreamPathTemplate": "/ocelot/deleteinwishlist/{uerid}/{id}",
       "UpstreamHttpMethod": [ "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/payment",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7031
+        }
+      ],
+      "UpstreamPathTemplate": "/ocelot/payment",
+      "UpstreamHttpMethod": [ "POST" ]
     }
   ],
   "GlobalConfiguration": {
