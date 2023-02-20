@@ -138,3 +138,4 @@ D:\ECommerceAssignment\Git\UserService\UserService\obj\Debug\net7.0\refint\UserS
 D:\ECommerceAssignment\Git\UserService\UserService\obj\Debug\net7.0\UserService.pdb
 D:\ECommerceAssignment\Git\UserService\UserService\obj\Debug\net7.0\UserService.genruntimeconfig.cache
 D:\ECommerceAssignment\Git\UserService\UserService\obj\Debug\net7.0\ref\UserService.dll
+D:\ECommerceAssignment\Git\UserService\UserService\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.InMemory.dll

@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService", "UserService\UserService.csproj", "{BAAC872C-3DDC-42AC-88D8-D56B923BDBD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserService", "UserService\UserService.csproj", "{BAAC872C-3DDC-42AC-88D8-D56B923BDBD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{832BE8CF-D33D-43AF-9777-4B245F0D51EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{832BE8CF-D33D-43AF-9777-4B245F0D51EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{D137CBEA-AB5E-43BE-B45B-9567937F86CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{D137CBEA-AB5E-43BE-B45B-9567937F86CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{17F55E92-D6DA-45A1-B8B0-CAA2AAB6B5D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{17F55E92-D6DA-45A1-B8B0-CAA2AAB6B5D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{5E4533BB-1F9C-49F2-9AAB-6D6C2C09D5F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{5E4533BB-1F9C-49F2-9AAB-6D6C2C09D5F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserServiceUnitTest", "UserServiceUnitTest\UserServiceUnitTest.csproj", "{D62CA589-5A17-441F-B0BF-A83E438728D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{5E4533BB-1F9C-49F2-9AAB-6D6C2C09D5F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E4533BB-1F9C-49F2-9AAB-6D6C2C09D5F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E4533BB-1F9C-49F2-9AAB-6D6C2C09D5F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D62CA589-5A17-441F-B0BF-A83E438728D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D62CA589-5A17-441F-B0BF-A83E438728D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D62CA589-5A17-441F-B0BF-A83E438728D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D62CA589-5A17-441F-B0BF-A83E438728D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -54,8 +54,7 @@ namespace ProductService.Controllers
             try
             {
                 Guid tokenUserId;
-
-                tokenUserId = Guid.Parse("3039a302-5cdd-48a7-b112-7b3d32b8b48d");
+                var isValidToken = Guid.TryParse(User.FindFirstValue("user_id"), out tokenUserId);
 
                 ProductResponse response = _productService.AddProduct(adminid , updateProduct, tokenUserId);
 
@@ -163,7 +162,9 @@ namespace ProductService.Controllers
         {
             _log.Info("Update User Details");
 
-            Guid tokenUserId = Guid.Parse("3039a302-5cdd-48a7-b112-7b3d32b8b48d");
+            //Guid tokenUserId = Guid.Parse("3039a302-5cdd-48a7-b112-7b3d32b8b48d");
+            Guid tokenUserId;
+            var isValidToken = Guid.TryParse(User.FindFirstValue("user_id"), out tokenUserId);
 
             try
             {
@@ -199,7 +200,6 @@ namespace ProductService.Controllers
         public IActionResult AddProductToCart(Guid userid, [FromBody] AddToCartDto addToCart)
         {
             _log.Info("Add Product to Cart ");
-
 
             Guid tokenUserId = Guid.Parse("97088ab0-6c00-432d-81ce-87828a674b55");
 
@@ -387,7 +387,7 @@ namespace ProductService.Controllers
         [Authorize]
         [HttpPatch]
         [Route("api/order/{userid}")]
-        public IActionResult CheckProductPrice(Guid userid)
+        public IActionResult WayToPayment(Guid userid)
         {
                 CartResponses userAccounts = _productService.Orderid(userid);
 
@@ -398,7 +398,6 @@ namespace ProductService.Controllers
                     return StatusCode(202, userAccounts.Message);
 
                 return StatusCode(200, true);
-            
         }
     }
 }

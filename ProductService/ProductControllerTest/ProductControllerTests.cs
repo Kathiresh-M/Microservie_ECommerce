@@ -46,6 +46,15 @@ namespace ProductControllerTest
             _productRepository = new ProductRepository(GetDbContext());
             _productService = new ProductServices(_mapper, _productRepository);
             _productController = new ProductController(_mapper, _productService);
+
+            string userId = "3039a302-5cdd-48a7-b112-7b3d32b8b48d";
+            Mock<HttpContext> contextMock = new Mock<HttpContext>();
+            contextMock.Setup(x => x.User).Returns(new ClaimsPrincipal(new ClaimsIdentity(new Claim[] {
+                                        new Claim("user_id",userId)
+                                        // other required and custom claims
+                           }, "TestAuthentication")));
+            _productController.ControllerContext.HttpContext = contextMock.Object;
+            //_wishListController.ControllerContext.HttpContext = contextMock.Object;
         }
 
         public ProductDbContext GetDbContext()
@@ -144,7 +153,6 @@ namespace ProductControllerTest
         public void CreateProduct_valid_ReturnCreatedStatus()
         {
             
-
             Guid id = Guid.Parse("3039a302-5cdd-48a7-b112-7b3d32b8b48d");
 
             CreateProductDto product = new CreateProductDto()

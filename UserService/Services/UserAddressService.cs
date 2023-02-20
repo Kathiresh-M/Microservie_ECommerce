@@ -59,12 +59,6 @@ namespace Services
                 if (!addressBook.Id.Equals(tokenUserId))
                     return new AddressResponse(false, "User not found", null);
 
-                var addressExists = _userAddressRepository.GetAddressByUserId(userid);
-
-                if (addressExists != null && addressExists.UserId.Equals(tokenUserId))
-                    return new AddressResponse(false, "Address already exists", null);
-
-
                 var usertosave = new Address()
                 {
                     Name = addressdto.Name,
@@ -98,16 +92,13 @@ namespace Services
         /// <param name="userId"></param>
         /// <param name="tokenUserId"></param>
         /// <returns></returns>
-        public AddressResponse GetAddressByAddressId(Guid userId, Guid tokenUserId)
+        public AddressResponse GetAddressByAddressId(Guid addressId, Guid tokenUserId)
         {
             _log.Info("Get addtess details by using address id");
 
             try
             {
-                if (!userId.Equals(tokenUserId))
-                    return new AddressResponse(false, "User not found", null);
-
-                var user = _userAddressRepository.GetAddress(userId);
+                var user = _userAddressRepository.GetAddress(addressId);
 
                 if (user == null)
                     return new AddressResponse(false, "Address not found", null);
