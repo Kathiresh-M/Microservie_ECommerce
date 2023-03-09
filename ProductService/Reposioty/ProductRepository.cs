@@ -209,5 +209,9 @@ namespace Repository
             return _databaseContext.Carts.SingleOrDefault(user => user.User_Id == userId);
         }
 
+        public List<Cart> GetPurchasedDetails(Guid userid)
+        {
+            return _databaseContext.Carts.Where(a => a.User_Id == userid && a.IsPurchase == true).ToList();
+        }
     }
 }

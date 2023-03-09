@@ -39,5 +39,6 @@ namespace Contracts.IRepository
         List<Cart> GetProducts(Guid id);
         Cart GetCartID(Guid cartId);
         Cart GetUserIDInCart(Guid userId);
+        List<Cart> GetPurchasedDetails(Guid userid);
     }
 }

@@ -120,7 +120,7 @@ namespace UserService.Controllers
         /// <response code="404">User Not Found</response>
         [HttpGet]
         [Authorize]
-        [Route("api/user/GetAllUserDetails/{userid}")]
+        [Route("api/user/GetUserDetails/{userid}")]
         public IActionResult GetAllUserDetailsById(Guid userid)
         {
             _log.Info("Get all User Details by using User Id");

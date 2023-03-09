@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.WebSockets;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
@@ -456,7 +457,21 @@ namespace Services
                 _productRepository.Save();
 
             return new CartResponses(true, null, null);
+        }
 
+        public ProductRes GetPurchase(Guid userid)
+        {
+            var getUserIdInCart = _productRepository.GetUserIDInCart(userid);
+
+            if (getUserIdInCart == null)
+                return new ProductRes(false, "User not found", null);
+
+            List<Purchased> userAccounts = _mapper.Map<List<Purchased>>(_productRepository.GetPurchasedDetails(userid));
+
+            if (userAccounts.Count == 0)
+                return new ProductRes(false,"No Content",null);
+
+            return new ProductRes(true,"",userAccounts);
         }
     }
 }

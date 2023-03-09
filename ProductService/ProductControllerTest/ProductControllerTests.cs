@@ -51,10 +51,8 @@ namespace ProductControllerTest
             Mock<HttpContext> contextMock = new Mock<HttpContext>();
             contextMock.Setup(x => x.User).Returns(new ClaimsPrincipal(new ClaimsIdentity(new Claim[] {
                                         new Claim("user_id",userId)
-                                        // other required and custom claims
                            }, "TestAuthentication")));
             _productController.ControllerContext.HttpContext = contextMock.Object;
-            //_wishListController.ControllerContext.HttpContext = contextMock.Object;
         }
 
         public ProductDbContext GetDbContext()
@@ -68,9 +66,6 @@ namespace ProductControllerTest
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
             }
-
-
-            
 
             context.Products.AddRange(new ProductModel
             {
@@ -321,15 +316,14 @@ namespace ProductControllerTest
         [Fact]
         public void AddProductToCart_ValidAlreadyExistInCart_ReturnOkStatus()
         {
-            string usersId = "97088ab0-6c00-432d-81ce-87828a674b55";
+            /*string usersId = "97088ab0-6c00-432d-81ce-87828a674b55";
             Mock<HttpContext> contextMock = new Mock<HttpContext>();
             contextMock.Setup(x => x.User).Returns(new ClaimsPrincipal(new ClaimsIdentity(new Claim[] {
                                         new Claim(ClaimTypes.NameIdentifier,usersId),
                                         new Claim(ClaimTypes.Role,"Admin"),
-                                        // other required and custom claims
                            }, "TestAuthentication")));
 
-            _productController.ControllerContext.HttpContext = contextMock.Object;
+            _productController.ControllerContext.HttpContext = contextMock.Object;*/
 
             Guid userId = Guid.Parse("97088ab0-6c00-432d-81ce-87828a674b55");
 

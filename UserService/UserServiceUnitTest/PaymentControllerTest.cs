@@ -61,7 +61,6 @@ namespace UserServiceUnitTest
             Mock<HttpContext> contextMock = new Mock<HttpContext>();
             contextMock.Setup(x => x.User).Returns(new ClaimsPrincipal(new ClaimsIdentity(new Claim[] {
                                         new Claim("user_id",userId)
-                                        // other required and custom claims
                            }, "TestAuthentication")));
             _controller.ControllerContext.HttpContext = contextMock.Object;
         }

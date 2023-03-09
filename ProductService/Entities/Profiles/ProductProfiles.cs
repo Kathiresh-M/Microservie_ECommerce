@@ -19,6 +19,7 @@ namespace Entities.Profiles
             CreateMap<CreateProductDto, ProductModel>();
             CreateMap<ProductModel, ProductReturnDto>().ReverseMap();
             CreateMap<Cart, CartReturnDto>();
+            CreateMap<Cart, Purchased>();
         }
     }
 }

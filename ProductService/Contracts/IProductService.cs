@@ -25,5 +25,6 @@ namespace Contracts
 
         //List<CartReturnDto> Orderid(Guid id);
         CartResponses Orderid(Guid id);
+        ProductRes GetPurchase(Guid userid);
     }
 }

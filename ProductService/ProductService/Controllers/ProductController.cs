@@ -175,8 +175,6 @@ namespace ProductService.Controllers
                     return NotFound(response.Message);
                 }
 
-                //var product = _mapper.Map<ProductReturnDto>(response.Productdto);
-
                 return Ok("Updated Successfully");
             }
             catch (Exception exception)
@@ -397,7 +395,35 @@ namespace ProductService.Controllers
                 if (!userAccounts.IsSuccess && userAccounts.Message.Contains("found"))
                     return StatusCode(202, userAccounts.Message);
 
-                return StatusCode(200, true);
+                return StatusCode(200, "Products Purchased Successfully");
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("api/getpurchaseddetails/{userid}")]
+        public IActionResult GetPurchasedDetails(Guid userid)
+        {
+            try
+            {
+                ProductRes getPurchase = _productService.GetPurchase(userid);
+
+                if (getPurchase.Message.Contains("User not found"))
+                {
+                    return StatusCode(404, false);
+                }
+
+                if (getPurchase.Message.Contains("Content"))
+                {
+                    return StatusCode(204, false);
+                }
+               
+                return Ok(getPurchase.Productdto);
+            }
+            catch (Exception exception)
+            {
+                _log.Error("Something went wrong", exception);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
     }
 }
